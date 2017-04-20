@@ -85,13 +85,30 @@ public class Ship {
 		return true;
 	}
 	
-	public boolean isShipDead(int numOfHitsRequired){
+	public boolean isShipDead(int numOfDeadBlocksRequired){
+		int blocksDead = 0;
 		for(Block block : occupiedBlocks){
-			if(block.getHitCount() < numOfHitsRequired){
-				return false;
+			if(ShipType.NORMAL_SHIP.equals(this.shipType)){
+				if(block.getHitCount() < ShipType.NORMAL_SHIP.getReqdHitCount() || !block.redNumberOfHitsDone()){
+					continue;
+				}
+			}else if(ShipType.SUPER_SHIP.equals(this.shipType)){
+				if(block.getHitCount() < ShipType.SUPER_SHIP.getReqdHitCount()){
+					continue;
+				}
+			}else{
+				throw new RuntimeException("Invalid ship type");
 			}
+			blocksDead++;
+			
 		}
-		return true;
+		
+		if(blocksDead >= numOfDeadBlocksRequired){
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
 	
 	public boolean isHit(int x, int y){

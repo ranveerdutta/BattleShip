@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Player {
 	
-	private static final int HIT_REQD_FOR_SUPER_USER = 1;
+	private static final int BLOCKS_DEAD_REQD_FOR_SUPER_USER = 1;
 	private Board board;
 	
 	private List<Ship> ships;
@@ -43,7 +43,7 @@ public class Player {
 	public boolean isPlayerDead(){
 		for(Ship ship : ships){
 			if(this.hasExtraPower){
-				if(!ship.isShipDead(HIT_REQD_FOR_SUPER_USER)){
+				if(!ship.isShipDead(BLOCKS_DEAD_REQD_FOR_SUPER_USER)){
 					return false;
 				}
 			}else{
