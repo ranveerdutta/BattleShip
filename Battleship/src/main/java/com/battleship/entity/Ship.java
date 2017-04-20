@@ -69,18 +69,9 @@ public class Ship {
 	
 	public boolean isShipDead(){
 		for(Block block : occupiedBlocks){
-			if(ShipType.NORMAL_SHIP.equals(this.shipType)){
-				if(block.getHitCount() < ShipType.NORMAL_SHIP.getReqdHitCount() || !block.redNumberOfHitsDone()){
-					return false;
-				}
-			}else if(ShipType.SUPER_SHIP.equals(this.shipType)){
-				if(block.getHitCount() < ShipType.SUPER_SHIP.getReqdHitCount()){
-					return false;
-				}
-			}else{
-				throw new RuntimeException("Invalid ship type");
+			if(!block.isBlockDead(this.shipType.getReqdHitCount())){
+				return false;
 			}
-			
 		}
 		return true;
 	}
@@ -88,16 +79,8 @@ public class Ship {
 	public boolean isShipDead(int numOfDeadBlocksRequired){
 		int blocksDead = 0;
 		for(Block block : occupiedBlocks){
-			if(ShipType.NORMAL_SHIP.equals(this.shipType)){
-				if(block.getHitCount() < ShipType.NORMAL_SHIP.getReqdHitCount() || !block.redNumberOfHitsDone()){
-					continue;
-				}
-			}else if(ShipType.SUPER_SHIP.equals(this.shipType)){
-				if(block.getHitCount() < ShipType.SUPER_SHIP.getReqdHitCount()){
-					continue;
-				}
-			}else{
-				throw new RuntimeException("Invalid ship type");
+			if(!block.isBlockDead(this.shipType.getReqdHitCount())){
+				return false;
 			}
 			blocksDead++;
 			

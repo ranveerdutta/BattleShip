@@ -44,6 +44,14 @@ public class Block {
 	public boolean redNumberOfHitsDone(){
 		return this.hitCount >= this.hitCountReqd;
 	}
+	
+	public boolean isBlockDead(int hitCountReqdForShipType){
+		int reqdHitCountForDeadBlock = hitCountReqdForShipType > this.hitCountReqd ? hitCountReqdForShipType : this.hitCountReqd;
+		if(this.getHitCount() >= reqdHitCountForDeadBlock){
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public int hashCode() {
